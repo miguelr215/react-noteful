@@ -1,0 +1,16 @@
+.App {
+    width: 100%;
+    padding: 10px;
+}
+
+.mainDisplay {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1;
+}
+
+.listDisplay {
+    flex: 3;
+}
