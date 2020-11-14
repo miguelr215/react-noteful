@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import ListDisplay from './ListDisplay/ListDisplay';
 import SideBar from './SideBar/SideBar';
-import AddButton from './AddButton/AddButton';
+import AddNoteButton from './AddNoteButton/AddNoteButton';
 import './App.css';
 
 class App extends Component {
@@ -12,10 +13,13 @@ class App extends Component {
           <h1>Noteful</h1>
         </header>
         <div className='mainDisplay'>
-          <div className='sidebar'>
+          <aside className='sidebar'>
             <SideBar></SideBar>
-          </div>
-          <main className='listDisplay'></main>
+          </aside>
+          <main className='listDisplay'>
+            <ListDisplay />
+            <AddNoteButton />
+          </main>
         </div>
       </div>
     );

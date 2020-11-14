@@ -3,6 +3,13 @@
     padding: 10px;
 }
 
+.noteHeader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+}
+
 .mainDisplay {
     display: flex;
 }
