@@ -1,6 +1,8 @@
 .App {
-    width: 100%;
+    width: 960px;
+    height: 100%;
     padding: 10px;
+    margin: 5px auto;
 }
 
 .noteHeader {
@@ -8,6 +10,14 @@
     justify-content: center;
     text-align: center;
     padding: 15px;
+}
+
+.header {
+    text-decoration: none;
+}
+
+.header:hover {
+    color: blue;
 }
 
 .mainDisplay {
