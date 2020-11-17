@@ -7,7 +7,9 @@ class Note extends Component {
         return(
             <div className='note'>
                 <h3>
-                    <Link to={`/note/:${this.props.id}`}>
+                    <Link 
+                        to={`/note/:${this.props.id}`}
+                        onClick={e => this.props.onNoteChange(this.props.id)}>
                         {this.props.name}
                     </Link>
                 </h3>

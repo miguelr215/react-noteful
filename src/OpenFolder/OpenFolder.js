@@ -3,17 +3,26 @@ import './OpenFolder.css';
 
 class OpenFolder extends Component {
     render(){
-        const folderIdFromNote = this
+        const selectedNoteId = this.props.selectedNoteId;
+        const selectedNote = this
             .props
             .folders
             .notes
-            .find(note => note.folderId === this.props.selectedNoteId) /*wrong */
+            .find(note => note.id === selectedNoteId);
+        
+        const folderFromNote = this
+            .props
+            .folders
+            .folders
+            .find(folder => folder.id === selectedNote.folderId);
+
         return(
             <div className='openFolder'>
-                <button>
+                <button className='goBackbtn'>
                     Go Back
                 </button>
-                <h2>{/*folder name*/}</h2>
+                <h5><i>Viewing Folder:</i></h5>
+                <h2 className='viewingFolder'>{folderFromNote.name}</h2>
             </div>
         )
     }

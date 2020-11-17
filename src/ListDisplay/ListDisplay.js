@@ -10,7 +10,11 @@ class ListDisplay extends Component {
             .props
             .notes
             .notes
-            .map((note, index) => <Note {...note} key={index} />)
+            .map((note, index) => 
+                <Note 
+                    {...note} 
+                    key={index}
+                    onNoteChange={this.props.onNoteChange} />)
         return(
             <div className='list'>
                 {notes}

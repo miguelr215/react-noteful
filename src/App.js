@@ -4,6 +4,7 @@ import ListDisplay from './ListDisplay/ListDisplay';
 import SideBar from './SideBar/SideBar';
 import FolderDisplay from './FolderDisplay/FolderDisplay';
 import OpenFolder from './OpenFolder/OpenFolder';
+import NoteDetails from './NoteDetails/NoteDetails';
 import STORE from './dummy-store';
 import './App.css';
 
@@ -65,7 +66,8 @@ class App extends Component {
                 render={() =>
                   <OpenFolder
                     folders={database}
-                    selectedNoteId={noteId} />}/>
+                    selectedNoteId={noteId} 
+                  />}/>
               <Route />
             </Switch>
           </aside>
@@ -77,6 +79,7 @@ class App extends Component {
                 render={() =>
                   <ListDisplay 
                     notes={database}
+                    onNoteChange={this.updateNote}
                   />
                 }/>
               <Route 
@@ -84,7 +87,18 @@ class App extends Component {
                 render={() =>
                   <FolderDisplay 
                     notes={database}
-                    selectedFolderId={folderId}/>}
+                    selectedFolderId={folderId}
+                    onNoteChange={this.updateNote}
+                  />}
+                />
+              <Route 
+                path={`/note/:${noteId}`}
+                render={() => 
+                  <NoteDetails 
+                    notes={database}
+                    selectedNoteId={noteId}
+                    onNoteChange={this.updateNote}
+                  />}
                 />
               <Route />
             </Switch>
