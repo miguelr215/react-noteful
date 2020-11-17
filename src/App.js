@@ -5,6 +5,8 @@ import SideBar from './SideBar/SideBar';
 import FolderDisplay from './FolderDisplay/FolderDisplay';
 import OpenFolder from './OpenFolder/OpenFolder';
 import NoteDetails from './NoteDetails/NoteDetails';
+import NoPageFound from './NoPageFound/NoPageFound';
+import NoSideBar from './NoSideBar/NoSideBar';
 import STORE from './dummy-store';
 import './App.css';
 
@@ -63,12 +65,13 @@ class App extends Component {
                   />}/>
               <Route 
                 path={`/note/:${noteId}`}
-                render={() =>
+                render={({ history }) =>
                   <OpenFolder
                     folders={database}
-                    selectedNoteId={noteId} 
+                    selectedNoteId={noteId}
+                    onBack={() => history.goBack()} 
                   />}/>
-              <Route />
+              <Route component={NoSideBar}/>
             </Switch>
           </aside>
           <main className='listDisplay'>
@@ -100,7 +103,7 @@ class App extends Component {
                     onNoteChange={this.updateNote}
                   />}
                 />
-              <Route />
+              <Route component={NoPageFound}/>
             </Switch>
           </main>
         </div>

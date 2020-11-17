@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './OpenFolder.css';
 
 class OpenFolder extends Component {
@@ -18,7 +19,10 @@ class OpenFolder extends Component {
 
         return(
             <div className='openFolder'>
-                <button className='goBackbtn'>
+                <button 
+                    className='goBackbtn'
+                    onClick={this.props.onBack}
+                    >
                     Go Back
                 </button>
                 <h5><i>Viewing Folder:</i></h5>
@@ -28,4 +32,4 @@ class OpenFolder extends Component {
     }
 }
 
-export default OpenFolder;
+export default withRouter(OpenFolder);
