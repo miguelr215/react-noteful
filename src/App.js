@@ -8,12 +8,15 @@ import OpenFolder from './OpenFolder/OpenFolder';
 import NoteDetails from './NoteDetails/NoteDetails';
 import NoPageFound from './NoPageFound/NoPageFound';
 import NoSideBar from './NoSideBar/NoSideBar';
+import config from './config';
 import STORE from './dummy-store';
 import './App.css';
 
 class App extends Component {
   state = {
     database: STORE,
+    folderList: [],
+    noteList: [],
     folderId: '',
     noteId: ''
   }
@@ -32,9 +35,56 @@ class App extends Component {
     })
   }
 
+  componentDidMount(){
+    // fetch for all folders
+    console.log(config.GET_FOLDER);
+    fetch(config.GET_FOLDER, {
+      method: 'GET'
+    })
+      .then(res => {
+        if(!res.ok){
+          return res.json().then(error => {
+            throw error
+          })
+        }
+        return res.json()
+      })
+      .then(data => {
+        this.setState({
+          folderList: data
+        })
+      })
+      .catch(error => {
+        console.error(error)
+      })
+
+    // fetch for all notes
+    console.log(config.GET_NOTES);
+    fetch(config.GET_NOTES, {
+      method: 'GET'
+    })
+      .then(res => {
+        if(!res.ok){
+          return res.json().then(error => {
+            throw error
+          })
+        }
+        return res.json()
+      })
+      .then(data => {
+        this.setState({
+          noteList: data
+        })
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+
   render(){
-    const { database, folderId, noteId } = this.state
-    console.log(database);
+    const { database, folderList, noteList, folderId, noteId } = this.state
+    console.log(folderList);
+    console.log(noteList);
     return (
       <div className='App'>
         <header className='noteHeader'>

@@ -5,7 +5,7 @@ import './ListDisplay.css';
 
 class ListDisplay extends Component {
     render(){
-        console.log(this.props.notes);
+        // console.log(this.props.notes);
         const notes = this
             .props
             .notes
