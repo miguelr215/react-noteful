@@ -1,0 +1,33 @@
+.App {
+    width: 960px;
+    height: 100%;
+    padding: 10px;
+    margin: 5px auto;
+}
+
+.noteHeader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.header {
+    text-decoration: none;
+}
+
+.header:hover {
+    color: blue;
+}
+
+.mainDisplay {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1;
+}
+
+.listDisplay {
+    flex: 3;
+}

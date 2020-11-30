@@ -1,40 +1,79 @@
+// this is BRANCH:  react-noteful-context
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import ListDisplay from './ListDisplay/ListDisplay';
-import SideBar from './SideBar/SideBar';
-import FolderDisplay from './FolderDisplay/FolderDisplay';
-import OpenFolder from './OpenFolder/OpenFolder';
-import NoteDetails from './NoteDetails/NoteDetails';
-import NoPageFound from './NoPageFound/NoPageFound';
-import NoSideBar from './NoSideBar/NoSideBar';
-import STORE from './dummy-store';
-import './App.css';
+import NoPageFound from '../NoPageFound/NoPageFound';
+import NoSideBar from '../NoSideBar/NoSideBar';
+import NoteListNav from './NoteListNav/NoteListNav';
+import NotefulContext from '../NotefulContext';
+import config from './config';
+// import STORE from './dummy-store';
+import './AppRefactored.css';
 
 class App extends Component {
   state = {
-    database: STORE,
-    folderId: '',
-    noteId: ''
+    notes: [],
+    folders: []
   }
 
-  updateFolder = (newFolderId) => {
-    console.log(newFolderId)
+  componentDidMount(){
+    console.log(config.GET_FOLDER);
+    console.log(config.GET_NOTES);
+    Promise.all([
+      fetch(config.GET_NOTES),
+      fetch(config.GET_FOLDER)
+    ])
+      .then((notesRes, foldersRes) => {
+        if(!notesRes.ok){
+          return notesRes.json().then(e => Promise.reject(e));
+        }
+        if(!foldersRes.ok){
+          return foldersRes.json().then(e => Promise.reject(e));
+        }
+        return Promise.all([notesRes.json(), foldersRes.json()])
+      })
+      .then(([notes, folders]) => {
+        this.setState({notes, folders})
+      })
+      .catch(error => {
+        console.error(error)
+      });
+  }
+
+  handleDeleteNote = noteId => {
     this.setState({
-      folderId: newFolderId
+      notes: this.state.notes.filter(note => note.id !== noteId)
     })
   }
 
-  updateNote = (newNoteId) => {
-    console.log(newNoteId)
-    this.setState({
-      noteId: newNoteId
-    })
+  renderSidebar(){
+    return (
+      <div className='sidebar'>
+        {['/', '/folder/:folderId'].map(path => (
+          <Route 
+            exact
+            path={path}
+            key={path}
+            component={NoteListNav}
+            />
+        ))}
+        
+      </div>
+    )
+  }
+
+  renderMainDisplay(){
+
   }
 
   render(){
-    const { database, folderId, noteId } = this.state
-    console.log(database);
+    const contextValue = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote
+    }
+    
     return (
+      <NotefulContext.Provider value={contextValue}>
       <div className='App'>
         <header className='noteHeader'>
           <h1>
@@ -108,6 +147,7 @@ class App extends Component {
           </main>
         </div>
       </div>
+      </NotefulContext.Provider>
     );
   }
 }
