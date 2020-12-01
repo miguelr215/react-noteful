@@ -1,0 +1,10 @@
+.NoteListNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.NoteListNav_list {
+    list-style: none;
+    text-decoration: none;
+}
+

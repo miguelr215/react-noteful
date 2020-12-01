@@ -26,8 +26,14 @@
 
 .sidebar {
     flex: 1;
+    border: 1px solid #000000;
+    height: 100vh;
+    padding: 10px;
+    text-align: center;
 }
 
 .listDisplay {
     flex: 3;
+    border: 1px solid #000000;
+    padding: 15px;
 }

@@ -1,11 +1,14 @@
 // this is BRANCH:  react-noteful-context
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import NoPageFound from '../NoPageFound/NoPageFound';
 import NoSideBar from '../NoSideBar/NoSideBar';
 import NoteListNav from './NoteListNav/NoteListNav';
+import NotePageNav from './NotePageNav/NotePageNav';
+import NoteListMain from './NoteListMain/NoteListMain';
+import NotePageMain from './NotePageMain/NotePageMain';
 import NotefulContext from '../NotefulContext';
-import config from './config';
+import config from '../config';
 // import STORE from './dummy-store';
 import './AppRefactored.css';
 
@@ -22,7 +25,7 @@ class App extends Component {
       fetch(config.GET_NOTES),
       fetch(config.GET_FOLDER)
     ])
-      .then((notesRes, foldersRes) => {
+      .then(([notesRes, foldersRes]) => {
         if(!notesRes.ok){
           return notesRes.json().then(e => Promise.reject(e));
         }
@@ -56,13 +59,29 @@ class App extends Component {
             component={NoteListNav}
             />
         ))}
-        
+        <Route path='/note/:noteId' component={NotePageNav} />
+        <Route path='/add-folder' component={NotePageNav} />
+        <Route path='/add-note' component={NotePageNav} />
+        {/* <Route component={NoSideBar} /> */}
       </div>
     )
   }
 
   renderMainDisplay(){
-
+    return(
+        <div className='MainListDisplay'>
+            {['/', '/folder/:folderId'].map(path => (
+                <Route 
+                    exact
+                    path={path}
+                    key={path}
+                    component={NoteListMain}
+                />
+            ))}
+            <Route path='/note/:noteId' component={NotePageMain}/>
+            {/* <Route component={NoPageFound} /> */}
+        </div>
+    )
   }
 
   render(){
@@ -84,66 +103,10 @@ class App extends Component {
         </header>
         <div className='mainDisplay'>
           <aside className='sidebar'>
-            <Switch>
-              <Route 
-                exact
-                path='/'
-                render={() =>
-                  <SideBar
-                    folders={database}
-                    onFolderChange={this.updateFolder} 
-                  />
-                }/>
-              <Route 
-                path={`/folder/:${folderId}`}
-                render={() =>
-                  <SideBar 
-                    folders={database}
-                    onFolderChange={this.updateFolder}
-                    selectedFolderId={folderId}
-                  />}/>
-              <Route 
-                path={`/note/:${noteId}`}
-                render={({ history }) =>
-                  <OpenFolder
-                    folders={database}
-                    selectedNoteId={noteId}
-                    onBack={() => history.goBack()} 
-                  />}/>
-              <Route component={NoSideBar}/>
-            </Switch>
+            {this.renderSidebar()}
           </aside>
           <main className='listDisplay'>
-            <Switch>
-              <Route 
-                exact
-                path='/'
-                render={() =>
-                  <ListDisplay 
-                    notes={database}
-                    onNoteChange={this.updateNote}
-                  />
-                }/>
-              <Route 
-                path={`/folder/:${folderId}`}
-                render={() =>
-                  <FolderDisplay 
-                    notes={database}
-                    selectedFolderId={folderId}
-                    onNoteChange={this.updateNote}
-                  />}
-                />
-              <Route 
-                path={`/note/:${noteId}`}
-                render={() => 
-                  <NoteDetails 
-                    notes={database}
-                    selectedNoteId={noteId}
-                    onNoteChange={this.updateNote}
-                  />}
-                />
-              <Route component={NoPageFound}/>
-            </Switch>
+            {this.renderMainDisplay()}
           </main>
         </div>
       </div>

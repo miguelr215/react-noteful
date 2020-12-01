@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PillButton from '../PillButton/PillButton';
 import NotefulContext from '../../NotefulContext';
+import { countNotesForFolder } from '../notes-helpers';
 import './NoteListNav.css';
 
 export default class NoteListNav extends React.Component {
@@ -19,6 +20,9 @@ export default class NoteListNav extends React.Component {
                                 className='NoteListNav_folderLink'
                                 to={`/folder/${folder.id}`}
                             >
+                                <span className='NoteListNav__num-notes'>
+                                    {countNotesForFolder(notes, folder.id)}
+                                </span>
                                 {folder.name}
                             </Link>
                         </li>
