@@ -31,6 +31,7 @@ export default class NotePageNav extends React.Component {
                 >
                     Back
                 </PillButton>
+                <h5 className='NotePageNav_folder-header'>Folder Name:</h5>
                 {folder && (
                     <h3 className='NotePageNav_folderName'>
                         {folder.name}

@@ -44,7 +44,7 @@ export default class FullNote extends React.Component {
         return(
             <div className='Note'>
                 <h2 className='Note_title'>
-                    <Link to={`note/${id}`}>
+                    <Link to={`/note/${id}`}>
                         {name}
                     </Link>
                 </h2>

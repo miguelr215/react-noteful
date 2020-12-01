@@ -10,6 +10,7 @@ const NotefulContext = React.createContext({
     // updateNote: () => {}
     notes: [],
     folders: [],
+    folderId: '',
     addFolder: () => {},
     addNote: () => {},
     deleteNote: () => {}

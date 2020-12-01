@@ -24,7 +24,7 @@ export default class NoteListMain extends React.Component {
         console.log(notesForFolder)
         return(
             <section className='NoteListMain'>
-                <ul>
+                <ul className='NoteListMain_list'>
                     {notesForFolder.map(note =>
                         <li key={note.id}>
                             <FullNote 

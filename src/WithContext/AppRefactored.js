@@ -1,6 +1,6 @@
 // this is BRANCH:  react-noteful-context
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import NoPageFound from '../NoPageFound/NoPageFound';
 import NoSideBar from '../NoSideBar/NoSideBar';
 import NoteListNav from './NoteListNav/NoteListNav';
@@ -51,18 +51,20 @@ class App extends Component {
   renderSidebar(){
     return (
       <div className='sidebar'>
-        {['/', '/folder/:folderId'].map(path => (
-          <Route 
-            exact
-            path={path}
-            key={path}
-            component={NoteListNav}
-            />
-        ))}
-        <Route path='/note/:noteId' component={NotePageNav} />
-        <Route path='/add-folder' component={NotePageNav} />
-        <Route path='/add-note' component={NotePageNav} />
-        {/* <Route component={NoSideBar} /> */}
+          <Switch>
+            {['/', '/folder/:folderId'].map(path => (
+            <Route 
+                exact
+                path={path}
+                key={path}
+                component={NoteListNav}
+                />
+            ))}
+            <Route path='/note/:noteId' component={NotePageNav} />
+            <Route path='/add-folder' component={NotePageNav} />
+            <Route path='/add-note' component={NotePageNav} />
+            <Route component={NoSideBar} />
+        </Switch>
       </div>
     )
   }
@@ -70,16 +72,18 @@ class App extends Component {
   renderMainDisplay(){
     return(
         <div className='MainListDisplay'>
-            {['/', '/folder/:folderId'].map(path => (
-                <Route 
-                    exact
-                    path={path}
-                    key={path}
-                    component={NoteListMain}
-                />
-            ))}
-            <Route path='/note/:noteId' component={NotePageMain}/>
-            {/* <Route component={NoPageFound} /> */}
+            <Switch>
+                {['/', '/folder/:folderId'].map(path => (
+                    <Route 
+                        exact
+                        path={path}
+                        key={path}
+                        component={NoteListMain}
+                    />
+                ))}
+                <Route path='/note/:noteId' component={NotePageMain}/>
+                <Route component={NoPageFound} />
+            </Switch>
         </div>
     )
   }
