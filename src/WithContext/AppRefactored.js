@@ -7,6 +7,7 @@ import NoteListNav from './NoteListNav/NoteListNav';
 import NotePageNav from './NotePageNav/NotePageNav';
 import NoteListMain from './NoteListMain/NoteListMain';
 import NotePageMain from './NotePageMain/NotePageMain';
+import AddFolder from './AddFolder/AddFolder';
 import NotefulContext from '../NotefulContext';
 import config from '../config';
 // import STORE from './dummy-store';
@@ -82,6 +83,7 @@ class App extends Component {
                     />
                 ))}
                 <Route path='/note/:noteId' component={NotePageMain}/>
+                <Route path='/add-folder' component={AddFolder} />
                 <Route component={NoPageFound} />
             </Switch>
         </div>

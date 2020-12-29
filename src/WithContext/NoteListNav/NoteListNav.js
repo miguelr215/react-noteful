@@ -34,7 +34,11 @@ export default class NoteListNav extends React.Component {
                     )}
                 </ul>
                 <div className='NoteListNav_buttonWrapper'>
-                    <PillButton>
+                    <PillButton
+                        tag='button'
+                        role='link'
+                        to='/add-folder'
+                    >
                         Add Folder
                     </PillButton>
                 </div>
