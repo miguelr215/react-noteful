@@ -11,4 +11,14 @@ export const getNotesForFolder = (notes=[], folderId) => (
 );
 
 export const countNotesForFolder = (notes=[], folderId) => 
-    notes.filter(note => note.folderId === folderId).length
+    notes.filter(note => note.folderId === folderId).length;
+
+export function generateRandomCharacters(keyLength){
+    let result = '';
+    let characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let charactersLength = characters.length;
+    for(let i = 0; i < keyLength; i++){
+        result += characters.substr(Math.floor((Math.random() * charactersLength) + 1), 1)
+    };
+    return result;
+};
