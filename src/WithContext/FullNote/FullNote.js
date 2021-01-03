@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import NotefulContext from '../../NotefulContext';
+import PropTypes from 'prop-types';
 import config from '../../config';
 import './FullNote.css';
 
@@ -67,4 +68,10 @@ export default class FullNote extends React.Component {
             </div>
         )
     }
+}
+
+FullNote.propTypes = {
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    modified: PropTypes.string
 }
