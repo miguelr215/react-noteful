@@ -20,9 +20,19 @@
     text-decoration: none;
 }
 
+.selectedFolder {
+    color: #FFB72F;
+    border: 1px solid #FFB72F;
+}
+
 .NoteListNav_folderLink:hover {
     color: #FFB72F;
     cursor: pointer;
+}
+
+.selectedFolder:hover {
+    color: deepskyblue;
+    border: 1px solid deepskyblue;
 }
 
 .NoteListNav_num-notes {
@@ -30,4 +40,4 @@
     display: block;
     float: right;
     font-size: 10px;
-  }
+}

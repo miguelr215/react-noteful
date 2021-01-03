@@ -8,15 +8,16 @@ import NotePageNav from './NotePageNav/NotePageNav';
 import NoteListMain from './NoteListMain/NoteListMain';
 import NotePageMain from './NotePageMain/NotePageMain';
 import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
 import NotefulContext from '../NotefulContext';
 import config from '../config';
-// import STORE from './dummy-store';
 import './AppRefactored.css';
 
 class App extends Component {
   state = {
     notes: [],
-    folders: []
+    folders: [],
+    folderId: ''
   }
 
   componentDidMount(){
@@ -55,6 +56,18 @@ class App extends Component {
     })
   }
 
+  addNote = newNote => {
+    this.setState({
+      notes: [...this.state.notes, newNote]
+    })
+  }
+
+  selectFolderId = (newFolder) => {
+    this.setState({
+      folderId: newFolder
+    })
+  }
+
   renderSidebar(){
     return (
       <div className='sidebar'>
@@ -90,6 +103,7 @@ class App extends Component {
                 ))}
                 <Route path='/note/:noteId' component={NotePageMain}/>
                 <Route path='/add-folder' component={AddFolder} />
+                <Route path='/add-note' component={AddNote} />
                 <Route component={NoPageFound} />
             </Switch>
         </div>
@@ -100,8 +114,11 @@ class App extends Component {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
+      folderId: this.state.folderId,
       deleteNote: this.handleDeleteNote,
-      addFolder: this.addFolder
+      addFolder: this.addFolder,
+      addNote: this.addNote,
+      selectFolderId: this.selectFolderId
     }
     
     return (

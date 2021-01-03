@@ -8,10 +8,6 @@ import './NoteListNav.css';
 export default class NoteListNav extends React.Component {
     static contextType = NotefulContext;
 
-    selectFolderId = (newFolder) => {
-        console.log(newFolder)
-    }
-
     render(){
         const { folders=[], notes=[], folderId } = this.context;
 
@@ -20,10 +16,12 @@ export default class NoteListNav extends React.Component {
                 <ul className='NoteListNav_list'>
                     {folders.map(folder =>
                         <li key={folder.id}>
+                            {console.log('map folder: ' + folder.id)}
+                            {console.log('context folder: ' + folderId)}
                             <Link 
                                 className={folder.id === folderId ? 'NoteListNav_folderLink selectedFolder' : 'NoteListNav_folderLink'}
                                 to={`/folder/${folder.id}`}
-                                onClick={e => this.selectFolderId(folder.id)}
+                                onClick={e => this.context.selectFolderId(folder.id)}
                             >
                                 <span className='NoteListNav_num-notes'>
                                     {countNotesForFolder(notes, folder.id)}

@@ -16,11 +16,11 @@ export default class AddFolder extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         const { newFolderName } = e.target;
-        const newFolder = {
-            'id': generateRandomCharacters(12),
-            'name': newFolderName.value
-        }
-        console.log(newFolder);
+        // const newFolder = {
+        //     'id': generateRandomCharacters(12),
+        //     'name': newFolderName.value
+        // }
+        // console.log(newFolder);
 
         this.setState({error: null});
 
