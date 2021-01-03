@@ -1,0 +1,16 @@
+.NavPillButton {
+    padding: 7px 12px;
+    margin: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 50px;
+    background: linear-gradient(to right, #e07613, #e2bc99);
+}
+
+.NavPillButton:hover {
+    background: #FFB72F;
+    cursor: pointer;
+}

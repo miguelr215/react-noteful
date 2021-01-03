@@ -5,7 +5,7 @@ import './SideBar.css';
 
 class SideBar extends Component {
     render(){
-        console.log(this.props.folders.folders);
+        // console.log(this.props.folders.folders);
         const folders = this
             .props
             .folders

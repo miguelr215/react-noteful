@@ -1,0 +1,43 @@
+.NoteListNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.NoteListNav_list {
+    list-style: none;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.NoteListNav_folderLink {
+    padding: 15px 25px;
+    margin: 5px auto;
+    background-color: #030f1f;
+    color: #b5b3b3;
+    display: block;
+    font-size: 20px;
+    max-width: 180px;
+    text-decoration: none;
+}
+
+.selectedFolder {
+    color: #FFB72F;
+    border: 1px solid #FFB72F;
+}
+
+.NoteListNav_folderLink:hover {
+    color: #FFB72F;
+    cursor: pointer;
+}
+
+.selectedFolder:hover {
+    color: deepskyblue;
+    border: 1px solid deepskyblue;
+}
+
+.NoteListNav_num-notes {
+    color: #adadad;
+    display: block;
+    float: right;
+    font-size: 10px;
+}

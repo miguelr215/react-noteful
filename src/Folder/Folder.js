@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NotefulContext from '../NotefulContext';
 import './Folder.css';
 
 class Folder extends Component {
+    static contextType = NotefulContext;
+
     render(){
-        const folderClass = this.props.selectedFolderId === this.props.id
+        const folders = this.context.folderList || {};
+        const selectedFolderId = this.context.folderId || '';
+
+        const folderClass = selectedFolderId === folders.id
             ? 'folder selected'
             : 'folder';
         return(
             <Link 
-                to={`/folder/:${this.props.id}`}
+                to={`/folder/:${folders.id}`}
                 className={folderClass} 
-                key={this.props.id}
-                onClick={e => this.props.onFolderChange(this.props.id)}
+                key={folders.id}
+                onClick={() => this.context.updateFolder(folders.id)}
             >
-                {this.props.name}
+                {folders.name}
             </Link>
         )
     }
