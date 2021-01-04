@@ -4,6 +4,7 @@ import PillButton from '../PillButton/PillButton';
 import NotefulContext from '../../NotefulContext';
 import config from '../../config';
 import { generateRandomCharacters } from '../notes-helpers';
+import AddNoteError from '../AddNoteError/AddNoteError';
 import './AddNote.css';
 
 export default class AddNote extends React.Component {
@@ -71,6 +72,7 @@ export default class AddNote extends React.Component {
         ));
         console.log(folderList);
         return(
+            <AddNoteError>
             <form onSubmit={this.handleSubmit}>
                 <h2>Add Note</h2>
                 <div className='AddNote__error' role='alert'>
@@ -115,6 +117,7 @@ export default class AddNote extends React.Component {
                     Cancel
                 </PillButton>
             </form>
+            </AddNoteError>
         )
     }
 }
